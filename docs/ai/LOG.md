@@ -22,7 +22,9 @@
 - Note: starting a fresh backend process hit `EADDRINUSE` because an existing `node dist/server.js` was already listening on port `8787`; that existing listener returned the passing health response.
 
 ### Next Action
-- Create or connect `https://github.com/hey-im-edward/vtrips-aws-fullstack`, then push `main` without force push.
+- Created public repo `https://github.com/hey-im-edward/vtrips-aws-fullstack`.
+- Pushed branch `main` to `origin`.
+- App production HTTPS URL remains `TODO CloudFront URL` because no AWS deploy was run.
 
 ## 2026-07-08 - Post-Implementation Audit
 

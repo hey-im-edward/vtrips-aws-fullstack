@@ -22,6 +22,7 @@
 - Target app GitHub repo: `https://github.com/hey-im-edward/vtrips-aws-fullstack`.
 - Target workshop repo: `https://github.com/hey-im-edward/aws-fcj-workshop`.
 - Target workshop URL: `https://hey-im-edward.github.io/aws-fcj-workshop/`.
+- Public app GitHub repo is created and branch `main` is pushed.
 - App production HTTPS URL remains `TODO CloudFront URL` until a real AWS deploy is approved and completed.
 
 ## Constraints

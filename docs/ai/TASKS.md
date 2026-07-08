@@ -3,8 +3,7 @@
 Do not put old completed history here; detailed history belongs in `LOG.md` or git history.
 
 ## Now
-- Stage G0: create or connect the public GitHub repo `hey-im-edward/vtrips-aws-fullstack`.
-- Push branch `main` without force push or history rewrite.
+- Review the public GitHub app repo after Stage G0 push.
 - Keep AWS deployment as a future, separately approved step.
 
 ## Next
@@ -16,6 +15,7 @@ Do not put old completed history here; detailed history belongs in `LOG.md` or g
 - Consider GitNexus indexing only for the current project repo if code understanding/refactor impact is needed.
 
 ## Done
+- Stage G0 created `https://github.com/hey-im-edward/vtrips-aws-fullstack` and pushed branch `main`.
 - Stage G0 local verification reran `npm.cmd install`, `npm.cmd run build`, and API smoke check before GitHub push.
 - Post-implementation audit completed: README local run verified, screenshots checked, submission docs checked, and build/smoke test rerun.
 - Added `docs/architecture/microservices-ready-architecture.md`.
