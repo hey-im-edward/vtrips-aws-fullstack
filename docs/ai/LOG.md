@@ -1,5 +1,40 @@
 # Log
 
+## 2026-07-08 - Implementation Goal Local Demo
+
+### Summary
+- Implemented the main V-Trips app repo as a local fullstack demo.
+- Added React/Vite/TypeScript frontend, Node.js/TypeScript backend, JSON runtime persistence, and app-local technical/submission docs.
+- Kept the main Workshop Link website out of this repo; only workshop reference docs were added for `../vtrips-workshop`.
+
+### Files Changed
+- Created root workspace package files and `.gitignore`.
+- Created frontend app in `frontend/`.
+- Created backend API in `backend/`.
+- Created helper scripts in `scripts/`.
+- Created AWS architecture/API/deploy/cleanup/testing/submission docs.
+- Created screenshots in `docs/submission/screenshots/`.
+- Updated `docs/ai/CONTEXT.md`, `docs/ai/TASKS.md`, and `docs/ai/LOG.md`.
+
+### Tests Run
+- `npm.cmd install` from repo root; result: 0 vulnerabilities.
+- `npm.cmd run build`; result: backend TypeScript build and frontend Vite production build passed.
+- Started backend and verified `http://127.0.0.1:8787/api/health` returned `status=ok`.
+- Captured desktop screenshot at `docs/submission/screenshots/vtrips-desktop.png`.
+- Captured mobile screenshot at `docs/submission/screenshots/vtrips-mobile.png`.
+- Captured tab screenshots for trips, saved, business, and admin views in `docs/submission/screenshots/`.
+- Inspected `docs/submission/screenshots/vtrips-ui-concept.png`, desktop screenshot, and mobile screenshot with `view_image`.
+- Inspected trips and admin screenshots with `view_image`.
+- Ran secret pattern scan with `rg`; result: no matches for the scanned AWS/key/password patterns.
+
+### Notes
+- Playwright MCP could not start because Chrome was missing at `C:\Users\elros\AppData\Local\Google\Chrome\Application\chrome.exe`.
+- Used Microsoft Edge headless as browser screenshot fallback.
+- Edge emitted a Chromium task manager warning while writing screenshots, but screenshot files were created successfully.
+
+### Next Action
+- User reviews local demo and decides whether to create/push GitHub or deploy AWS S3/CloudFront.
+
 ## 2026-07-08 - Stage V0.2 Workshop Repo Split
 
 ### Summary

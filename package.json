@@ -1,0 +1,21 @@
+{
+  "name": "vtrips-aws-fullstack",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:frontend": "npm --workspace frontend run dev",
+    "dev:backend": "npm --workspace backend run dev",
+    "build": "npm --workspace backend run build && npm --workspace frontend run build",
+    "start": "npm --workspace backend run start",
+    "check": "npm run build && node scripts/smoke-api.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

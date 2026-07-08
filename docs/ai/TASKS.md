@@ -3,19 +3,13 @@
 Do not put old completed history here; detailed history belongs in `LOG.md` or git history.
 
 ## Now
-- Commit the current planning baseline before starting the long Goal run:
-  `git add .`
-  `git commit -m "chore: bootstrap vtrips planning materials"`
-- Run the next Codex Goal from `GOAL.md` inside `D:\elros\Documents\AI-LifeOS\repos\vtrips-aws-fullstack`.
-- Start the next stage by reading `AGENTS.md`, `PLAN.md`, `docs/source-materials/`, `docs/ai/CONTEXT.md`, `docs/ai/TASKS.md`, and `GOAL.md`.
-- Keep workshop website work in `../vtrips-workshop`; do not build the main Workshop Link site in this app repo.
+- Review the implemented local demo and submission docs.
+- Decide whether to create/push a GitHub repo.
+- Decide whether to deploy the frontend to AWS S3/CloudFront.
 
 ## Next
-- Implement `GOAL.md`/`PLAN.md` with local app first, then docs, visual QA, and AWS-ready guidance.
-- Update product brief and task breakdown for the implementation Goal.
-- Scaffold frontend/backend without touching AI-LifeOS root.
-- Make the local app boot before attempting AWS deployment.
-- Use browser/screenshot-based visual QA when UI exists.
+- If approved, create GitHub remote after confirming no secrets are present.
+- If approved, perform AWS frontend deployment from `frontend/dist` using S3 + CloudFront.
 - Use app technical docs/submission docs as source material for `../vtrips-workshop`.
 
 ## Later
@@ -24,6 +18,10 @@ Do not put old completed history here; detailed history belongs in `LOG.md` or g
 - Consider GitNexus indexing only for the current project repo if code understanding/refactor impact is needed.
 
 ## Done
+- Implementation Goal local app completed: React/Vite frontend and Node/TypeScript backend exist.
+- Core V-Trips workflows implemented locally: places, trips, saved places, reviews, booking, dashboards, export, AI fallback, demo auth/profile.
+- Required app-local technical/submission docs created.
+- Browser screenshot QA captured in `docs/submission/screenshots/`.
 - Stage V0.2 workshop repository split recorded: Workshop Link website is `../vtrips-workshop`.
 - Stage V0.2 Goal handoff file created at `GOAL.md`.
 - Stage V0.1 Deep Research source material injected into `docs/source-materials/full-deep-research-report.md`.

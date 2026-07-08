@@ -1,0 +1,46 @@
+flowchart LR
+  viewer[Viewer Browser]
+  cf[CloudFront HTTPS CDN]
+  s3[S3 Frontend and Media Bucket]
+  api[API Gateway HTTP API]
+  lambda[Lambda Backend Modules]
+  ddb[DynamoDB Tables]
+  cognito[Cognito User Pool]
+  cw[CloudWatch Logs and Metrics]
+  iam[IAM Least Privilege Roles]
+
+  viewer -->|HTTPS| cf
+  cf -->|Static React build| s3
+  cf -->|/api/* optional behavior| api
+  viewer -->|API calls in local/dev or direct prod| api
+  api --> lambda
+  lambda --> ddb
+  lambda --> s3
+  viewer -.auth flow.-> cognito
+  cognito -.JWT.-> api
+  lambda --> cw
+  api --> cw
+  iam -.execution role.-> lambda
+  iam -.OAC bucket access.-> cf
+
+  subgraph Backend Modules
+    auth[Auth/User]
+    listing[Listing/Place]
+    review[Review/Rating]
+    trip[Trip Planner]
+    social[Social Save/Like]
+    booking[Booking]
+    dashboard[Business/Admin]
+    export[Export PDF]
+    ai[AI Suggestion]
+  end
+
+  lambda --> auth
+  lambda --> listing
+  lambda --> review
+  lambda --> trip
+  lambda --> social
+  lambda --> booking
+  lambda --> dashboard
+  lambda --> export
+  lambda --> ai
