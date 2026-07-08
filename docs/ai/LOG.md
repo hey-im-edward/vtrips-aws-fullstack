@@ -1,5 +1,29 @@
 # Log
 
+## 2026-07-08 - Stage G0 GitHub Publish Preparation
+
+### Summary
+- Prepared app repo documentation for public GitHub publishing.
+- Recorded the target app repo, workshop repo, workshop URL, and CloudFront TODO URL.
+- Confirmed Stage G0 is GitHub-only and does not create or deploy AWS resources.
+
+### Files Changed
+- Updated `README.md`.
+- Updated `docs/submission/submission-checklist.md`.
+- Updated `docs/submission/final-report.md`.
+- Updated `docs/ai/CONTEXT.md`.
+- Updated `docs/ai/TASKS.md`.
+- Updated `docs/ai/LOG.md`.
+
+### Tests Run
+- `npm.cmd install`; result: up to date, 0 vulnerabilities.
+- `npm.cmd run build`; result: backend TypeScript build and frontend Vite production build passed.
+- `node scripts/smoke-api.mjs`; result: API smoke check passed at `http://127.0.0.1:8787`.
+- Note: starting a fresh backend process hit `EADDRINUSE` because an existing `node dist/server.js` was already listening on port `8787`; that existing listener returned the passing health response.
+
+### Next Action
+- Create or connect `https://github.com/hey-im-edward/vtrips-aws-fullstack`, then push `main` without force push.
+
 ## 2026-07-08 - Post-Implementation Audit
 
 ### Summary

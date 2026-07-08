@@ -3,21 +3,20 @@
 Do not put old completed history here; detailed history belongs in `LOG.md` or git history.
 
 ## Now
-- Review the implemented local demo and submission docs.
-- Decide whether to create/push a GitHub repo.
-- Decide whether to deploy the frontend to AWS S3/CloudFront.
+- Stage G0: create or connect the public GitHub repo `hey-im-edward/vtrips-aws-fullstack`.
+- Push branch `main` without force push or history rewrite.
+- Keep AWS deployment as a future, separately approved step.
 
 ## Next
-- If approved, create GitHub remote after confirming no secrets are present.
 - If approved, perform AWS frontend deployment from `frontend/dist` using S3 + CloudFront.
 - Use app technical docs/submission docs as source material for `../vtrips-workshop`.
 
 ## Later
-- Create GitHub repo after local app and documentation skeleton are stable.
 - Ask user before any AWS deploy or cost-impacting resource creation.
 - Consider GitNexus indexing only for the current project repo if code understanding/refactor impact is needed.
 
 ## Done
+- Stage G0 local verification reran `npm.cmd install`, `npm.cmd run build`, and API smoke check before GitHub push.
 - Post-implementation audit completed: README local run verified, screenshots checked, submission docs checked, and build/smoke test rerun.
 - Added `docs/architecture/microservices-ready-architecture.md`.
 - Fixed README dev script reliability on Windows background/redirected runs.

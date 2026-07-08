@@ -3,6 +3,12 @@
 ## Summary
 V-Trips is a local fullstack travel product demo with a React/Vite frontend, Node.js/TypeScript backend, local JSON persistence, and AWS-ready architecture documentation. The app repo does not build the separate FCJ-style workshop website; that belongs in `../vtrips-workshop`.
 
+## Public links
+- App GitHub repo: `https://github.com/hey-im-edward/vtrips-aws-fullstack`
+- Workshop repo: `https://github.com/hey-im-edward/aws-fcj-workshop`
+- Workshop URL: `https://hey-im-edward.github.io/aws-fcj-workshop/`
+- App production HTTPS URL: `TODO CloudFront URL`
+
 ## What was built
 - Frontend app shell with Explore, Trips, Saved, Business, and Admin tabs.
 - Place discovery/search/filter, place detail, create/edit place, save/like.
@@ -84,7 +90,6 @@ Follow `docs/deployment/aws-deploy-guide.md`. No AWS resources were created duri
 
 ## What user must do before submission
 - Run the local demo and capture final screenshots.
-- Decide whether to create/push the GitHub repo.
 - Decide whether to deploy frontend to AWS S3/CloudFront.
 - Keep the final Workshop Link website in `../vtrips-workshop`.
 

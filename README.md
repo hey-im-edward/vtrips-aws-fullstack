@@ -4,6 +4,12 @@ V-Trips is a full-scoring demo target for an AWS FCAJ/HUTECH internship submissi
 
 The FCJ-style Workshop Link website is intentionally split into `../vtrips-workshop`. This repo contains the main app, local demo, technical docs, submission docs, and workshop reference material that the workshop repo can link to.
 
+## Public Links
+- App GitHub repo: `https://github.com/hey-im-edward/vtrips-aws-fullstack`
+- Workshop repo: `https://github.com/hey-im-edward/aws-fcj-workshop`
+- Workshop URL: `https://hey-im-edward.github.io/aws-fcj-workshop/`
+- App production HTTPS URL: `TODO CloudFront URL`
+
 ## Implemented
 - Local React + Vite + TypeScript frontend in `frontend/`.
 - Local Node.js + TypeScript API in `backend/`.

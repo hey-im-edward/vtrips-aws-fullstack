@@ -33,5 +33,11 @@
 - [x] Start backend and verify `/api/health`.
 - [x] Capture desktop, mobile, trips, saved, business, and admin screenshots.
 - [x] Run secret pattern scan for common AWS/key/password patterns.
-- [ ] Decide whether to create/push GitHub repo.
+- [x] Create/push GitHub repo approved for Stage G0.
 - [ ] Ask user before any AWS deploy.
+
+## Public Links
+- App GitHub repo: `https://github.com/hey-im-edward/vtrips-aws-fullstack`
+- Workshop repo: `https://github.com/hey-im-edward/aws-fcj-workshop`
+- Workshop URL: `https://hey-im-edward.github.io/aws-fcj-workshop/`
+- App production HTTPS URL: `TODO CloudFront URL`

@@ -5,7 +5,7 @@
 - The demo should prioritize a working local product, polished travel UI, clear backend/API boundaries, AWS architecture documentation, workshop materials, blog drafts, deployment guide, and cleanup guide.
 
 ## Current Focus
-- Post-implementation audit: verify local run, screenshots, submission docs, workshop-repo boundary, and microservices-ready architecture notes.
+- Stage G0: publish the app repo to GitHub after local build verification.
 - The FCJ-style Workshop Link website remains split into `../vtrips-workshop`; this repo only keeps app-local workshop reference docs.
 
 ## Current Status
@@ -19,9 +19,13 @@
 - Submission docs and screenshots are under `docs/submission/`.
 - Microservices-ready architecture notes are documented at `docs/architecture/microservices-ready-architecture.md`.
 - README local run has been audited with `npm.cmd install` and `npm.cmd run dev`.
+- Target app GitHub repo: `https://github.com/hey-im-edward/vtrips-aws-fullstack`.
+- Target workshop repo: `https://github.com/hey-im-edward/aws-fcj-workshop`.
+- Target workshop URL: `https://hey-im-edward.github.io/aws-fcj-workshop/`.
+- App production HTTPS URL remains `TODO CloudFront URL` until a real AWS deploy is approved and completed.
 
 ## Constraints
-- Do not create a GitHub repo unless explicitly asked.
+- GitHub repo creation/push is explicitly approved for Stage G0 only.
 - Do not deploy AWS resources unless explicitly approved.
 - Do not run GitNexus analyze/index from AI-LifeOS root.
 - Do not modify AI-LifeOS root `.git`.
@@ -35,5 +39,4 @@
 - Do not install dependencies until the implementation stage explicitly needs them.
 
 ## Open Questions
-- Whether GitHub should be created after the local demo and documentation skeleton are stable.
-- Whether the user wants a real AWS frontend deploy after reviewing the local demo.
+- Whether the user wants a real AWS frontend deploy after reviewing the GitHub-published demo materials.
