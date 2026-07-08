@@ -1,0 +1,101 @@
+# Log
+
+## 2026-07-08 - Stage V0.2 Workshop Repo Split
+
+### Summary
+- Recorded that the FCJ-style Workshop Link / internship report website is a separate repo: `../vtrips-workshop`.
+- Updated app planning materials so this repo stays focused on the main V-Trips frontend/backend/AWS demo app.
+- Kept app repo technical docs/submission docs as reference material for the workshop repo.
+
+### Files Changed
+- Updated `PLAN.md`.
+- Updated `GOAL.md`.
+- Updated `docs/ai/TASKS.md`.
+- Updated `docs/ai/DECISIONS.md`.
+- Updated `docs/ai/LOG.md`.
+
+### Tests Run
+- `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-ai-lifeos.ps1` from AI-LifeOS root.
+- Result: `RESULT: PASS`.
+
+### Next Action
+- Run the app implementation Goal in this repo and the workshop implementation Goal separately in `../vtrips-workshop`.
+
+## 2026-07-08 - Stage V0.2 Codex Goal Handoff
+
+### Summary
+- Created `GOAL.md` as the full handoff brief for the next Codex Goal run.
+- Captured the required reading order, product scope, AWS target, UI/API requirements, validation loop, checkpoints, stopping condition, and final report format.
+- Kept this task scoped to planning materials only; no application code was implemented.
+
+### Files Changed
+- Created `GOAL.md`.
+- Updated `docs/ai/TASKS.md`.
+- Updated `docs/ai/LOG.md`.
+
+### Tests Run
+- Read required inputs: `AGENTS.md`, `PLAN.md`, `docs/source-materials/research-action-summary.md`, `docs/source-materials/full-deep-research-report.md`, `docs/ai/CONTEXT.md`, and `docs/ai/TASKS.md`.
+- Verified `GOAL.md` did not exist before this task.
+- Verified `GOAL.md`, `docs/ai/LOG.md`, and `docs/ai/TASKS.md` exist after the update.
+- Read back `GOAL.md` after creation and confirmed it contains the required handoff sections.
+- Ran a PowerShell existence/keyword checklist for `GOAL.md`; all required sections and AWS keywords returned `True`.
+- Attempted keyword verification with `Select-String` on `GOAL.md`, but the local hook blocked it with: `Use GitNexus query/context first for this indexed repo, then retry manual search.` GitNexus tools were not available in this session, so verification used direct file read instead.
+- Did not run app build/tests because this stage only creates documentation handoff material.
+
+### Constraints Honored
+- Did not code the app.
+- Did not run `npm install`.
+- Did not deploy AWS resources.
+- Did not run GitNexus `analyze` or `index`.
+- Did not create a GitHub repo.
+
+### Next Action
+- Commit the baseline:
+  `git add .`
+  `git commit -m "chore: bootstrap vtrips planning materials"`
+- Start the next Codex Goal from `GOAL.md`.
+
+## 2026-07-08 - Stage V0.1 Source Material Injection
+
+### Summary
+- Stage V0.1 source material injection completed.
+- Loaded the full Deep Research report into repo-local source materials.
+- Created a short action summary for the next Codex Goal run.
+
+### Files Changed
+- Created `docs/source-materials/full-deep-research-report.md`.
+- Created `docs/source-materials/research-action-summary.md`.
+- Updated `docs/ai/TASKS.md`.
+- Updated `docs/ai/LOG.md`.
+
+### Tests Run
+- Verified current directory is `D:\elros\Documents\AI-LifeOS\repos\vtrips-aws-fullstack`.
+- Verified GitNexus `list_repos` returned no indexed repositories, so no graph was available for this repo.
+- Verified `docs/source-materials/full-deep-research-report.md` exists.
+- Verified `docs/source-materials/research-action-summary.md` exists.
+- Verified SHA256 hash match between the attached Deep Research report and `docs/source-materials/full-deep-research-report.md`: `232E87238A2A296E87EC61A7E2B4E88F81D9CCC8AE0C445BC057EEE0DA586D18`.
+
+### Next Action
+- Run the next Codex Goal from `PLAN.md`.
+
+## 2026-07-08 - Stage V0 Project Bootstrap
+
+### Summary
+- Created the real V-Trips project scaffold for the AWS FCAJ/HUTECH fullstack submission demo.
+- Loaded the research brief and created a Goal-ready `PLAN.md`.
+- Prepared repo-local `docs/ai` as the daily source of truth for the next stage.
+
+### Files Changed
+- Created `PLAN.md`.
+- Created `docs/source-materials/research-brief.md`.
+- Updated `docs/ai/CONTEXT.md`.
+- Updated `docs/ai/TASKS.md`.
+- Updated `docs/ai/DECISIONS.md`.
+- Updated `docs/ai/LOG.md`.
+
+### Tests Run
+- `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-ai-lifeos.ps1` from AI-LifeOS root.
+- Result: `RESULT: PASS`.
+
+### Next Action
+- Open Codex in `D:\elros\Documents\AI-LifeOS\repos\vtrips-aws-fullstack` and run the next Goal using `PLAN.md`.
