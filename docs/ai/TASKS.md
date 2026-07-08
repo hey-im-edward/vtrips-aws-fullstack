@@ -18,6 +18,10 @@ Do not put old completed history here; detailed history belongs in `LOG.md` or g
 - Consider GitNexus indexing only for the current project repo if code understanding/refactor impact is needed.
 
 ## Done
+- Post-implementation audit completed: README local run verified, screenshots checked, submission docs checked, and build/smoke test rerun.
+- Added `docs/architecture/microservices-ready-architecture.md`.
+- Fixed README dev script reliability on Windows background/redirected runs.
+- Fixed mobile nav screenshot issue where `Admin` could be clipped.
 - Implementation Goal local app completed: React/Vite frontend and Node/TypeScript backend exist.
 - Core V-Trips workflows implemented locally: places, trips, saved places, reviews, booking, dashboards, export, AI fallback, demo auth/profile.
 - Required app-local technical/submission docs created.

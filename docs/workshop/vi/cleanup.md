@@ -1,6 +1,7 @@
 # V-Trips App Cleanup Reference
 
 Chỉ cleanup sau khi user duyệt vì thao tác này có thể xóa tài nguyên AWS.
+File này chỉ là tài liệu tham chiếu deploy app cho `../vtrips-workshop`, không phải website Workshop Link chính.
 
 ## Checklist
 - Tắt/xóa CloudFront distribution nếu không còn dùng link nộp bài.

@@ -602,16 +602,19 @@ form button,
   nav {
     grid-column: 1 / -1;
     justify-content: flex-start;
-    overflow-x: auto;
+    overflow-x: hidden;
     width: 100%;
     min-width: 0;
     max-width: 100%;
     padding-bottom: 2px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
 
   nav button {
     flex: 0 0 auto;
+    min-height: 34px;
+    padding: 0 10px;
+    font-size: 0.84rem;
   }
 
   .primary-button {

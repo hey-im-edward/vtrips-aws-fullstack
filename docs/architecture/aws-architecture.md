@@ -44,3 +44,5 @@ V-Trips is implemented locally as a modular monolith/serverless-style demo and d
 - Working locally: frontend, backend, local persistence, core demo workflows.
 - Prototype/fallback: Cognito, Bedrock, production PDF, AWS deployment.
 - Future work: production IAM policies, DynamoDB schema, CI/CD, monitoring alarms, and real cleanup automation.
+
+For the service split path, see `docs/architecture/microservices-ready-architecture.md`.

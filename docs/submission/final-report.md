@@ -33,6 +33,7 @@ Open `http://127.0.0.1:5173`. Backend health runs at `http://127.0.0.1:8787/api/
 - Cognito-ready auth.
 - CloudWatch logs/metrics.
 - IAM least privilege.
+- Microservices-ready service boundaries and future split path in `docs/architecture/microservices-ready-architecture.md`.
 
 ## How to deploy AWS
 Follow `docs/deployment/aws-deploy-guide.md`. No AWS resources were created during this local implementation run.
@@ -79,9 +80,17 @@ Follow `docs/deployment/aws-deploy-guide.md`. No AWS resources were created duri
 - Official FCAJ/HUTECH rules were not fully verifiable from public links in the source report.
 - Remote Unsplash images require network access for best visual demo.
 - Real AWS deploy, Cognito, Bedrock, and DynamoDB integration remain future implementation.
+- Current architecture is microservices-ready modular monolith, not real production microservices.
 
 ## What user must do before submission
 - Run the local demo and capture final screenshots.
 - Decide whether to create/push the GitHub repo.
 - Decide whether to deploy frontend to AWS S3/CloudFront.
 - Keep the final Workshop Link website in `../vtrips-workshop`.
+
+## Post-Implementation Audit Update
+- README local run was verified with `npm.cmd install` and `npm.cmd run dev`.
+- Build and API smoke test were rerun after audit fixes.
+- Mobile screenshot was refreshed after the nav clipping fix.
+- Microservices-ready notes were added in `docs/architecture/microservices-ready-architecture.md`.
+- `docs/workshop/` remains app reference material only; the main Workshop Link website belongs in `../vtrips-workshop`.

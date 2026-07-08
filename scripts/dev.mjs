@@ -7,12 +7,18 @@ const processes = [
   ["frontend", ["--workspace", "frontend", "run", "dev", "--", "--host", "127.0.0.1"]]
 ];
 
+const children = [];
+
 for (const [name, args] of processes) {
   const child = spawn(npmCommand, args, {
-    stdio: "inherit",
-    shell: false,
+    stdio: ["ignore", "pipe", "pipe"],
+    shell: process.platform === "win32",
     env: { ...process.env, FORCE_COLOR: "1" }
   });
+
+  children.push(child);
+  child.stdout?.on("data", (chunk) => process.stdout.write(`[${name}] ${chunk}`));
+  child.stderr?.on("data", (chunk) => process.stderr.write(`[${name}] ${chunk}`));
 
   child.on("exit", (code) => {
     if (code && code !== 0) {
@@ -23,5 +29,10 @@ for (const [name, args] of processes) {
 }
 
 process.on("SIGINT", () => {
+  for (const child of children) {
+    if (!child.killed) {
+      child.kill("SIGINT");
+    }
+  }
   process.exit(0);
 });

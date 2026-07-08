@@ -5,7 +5,7 @@
 - The demo should prioritize a working local product, polished travel UI, clear backend/API boundaries, AWS architecture documentation, workshop materials, blog drafts, deployment guide, and cleanup guide.
 
 ## Current Focus
-- Implementation Goal: build the main V-Trips app repo with frontend, backend, local demo, UI polish, AWS architecture docs, and submission docs.
+- Post-implementation audit: verify local run, screenshots, submission docs, workshop-repo boundary, and microservices-ready architecture notes.
 - The FCJ-style Workshop Link website remains split into `../vtrips-workshop`; this repo only keeps app-local workshop reference docs.
 
 ## Current Status
@@ -17,6 +17,8 @@
 - Backend: Node.js + TypeScript API implemented in `backend/`.
 - Local persistence: JSON runtime database generated at `backend/data/runtime-db.json` and ignored by git.
 - Submission docs and screenshots are under `docs/submission/`.
+- Microservices-ready architecture notes are documented at `docs/architecture/microservices-ready-architecture.md`.
+- README local run has been audited with `npm.cmd install` and `npm.cmd run dev`.
 
 ## Constraints
 - Do not create a GitHub repo unless explicitly asked.

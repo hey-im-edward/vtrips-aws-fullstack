@@ -1,6 +1,7 @@
 # V-Trips App Cleanup Reference
 
 Only clean up after user approval because this can delete AWS resources.
+This file is app deployment reference material for `../vtrips-workshop`; it is not the main Workshop Link website.
 
 ## Checklist
 - Disable/delete CloudFront distribution if no submission link depends on it.

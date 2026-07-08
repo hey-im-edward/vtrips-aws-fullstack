@@ -1,5 +1,33 @@
 # Log
 
+## 2026-07-08 - Post-Implementation Audit
+
+### Summary
+- Audited V-Trips app after implementation against `AGENTS.md`, `PLAN.md`, `GOAL.md`, `README.md`, `docs/ai/*`, and `docs/submission/final-report.md`.
+- Verified README local run path with `npm.cmd install` and `npm.cmd run dev`.
+- Added microservices-ready architecture notes without changing the app architecture or adding real microservices.
+- Confirmed `docs/workshop/` files are app reference docs only and point to `../vtrips-workshop` for the main Workshop Link website.
+
+### Issues Fixed
+- Fixed `scripts/dev.mjs` so `npm.cmd run dev` works when launched from Windows background/redirected output; prior audit saw `spawn EINVAL`.
+- Tightened mobile nav styling so the `Admin` tab is visible in the mobile screenshot.
+- Added `docs/architecture/microservices-ready-architecture.md` and linked it from README, AWS architecture, and final report.
+- Added explicit workshop-boundary wording to workshop cleanup reference files.
+
+### Tests Run
+- `npm.cmd install`; result: up to date, 0 vulnerabilities.
+- `npm.cmd run dev`; result: frontend returned HTTP 200 at `http://127.0.0.1:5173/`, backend health returned `status=ok`.
+- Refreshed `docs/submission/screenshots/vtrips-mobile.png` after mobile nav fix.
+- `npm.cmd run build`; result: backend TypeScript build and frontend Vite production build passed.
+- `node scripts/smoke-api.mjs`; result: API smoke check passed at `http://127.0.0.1:8787`.
+- Verified no dev server remained listening on ports `5173` or `8787` after audit.
+- Verified required audit artifacts: 19 files present, including `docs/architecture/microservices-ready-architecture.md` and submission screenshots.
+- Verified all 6 `docs/workshop/` reference files mention `../vtrips-workshop`.
+- Ran common secret pattern scan with `rg`; result: no matches for scanned AWS/key/password patterns.
+
+### Next Action
+- Review the audited demo, then decide whether to commit, create/push GitHub, or approve an AWS S3/CloudFront deploy.
+
 ## 2026-07-08 - Implementation Goal Local Demo
 
 ### Summary

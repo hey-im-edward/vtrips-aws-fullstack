@@ -59,6 +59,7 @@ node scripts/smoke-api.mjs
 - IAM least privilege.
 
 See [AWS architecture](docs/architecture/aws-architecture.md), [deploy guide](docs/deployment/aws-deploy-guide.md), and [cleanup guide](docs/deployment/cleanup-guide.md).
+For the future split path, see [microservices-ready architecture](docs/architecture/microservices-ready-architecture.md).
 
 ## Documentation Map
 - API: `docs/api/endpoints.md`
