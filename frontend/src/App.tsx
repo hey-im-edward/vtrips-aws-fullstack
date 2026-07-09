@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { api } from "./api";
+import { api, apiUrl } from "./api";
 import type { AiSuggestion, Booking, DashboardSummary, Place, Profile, Review, Trip } from "./types";
 
 const categories = ["All", "Hotel", "Restaurant", "Attraction", "Tour"] as const;
@@ -339,7 +339,7 @@ export default function App() {
   }
 
   function exportTrip(tripId: string) {
-    window.open(`/api/export/trips/${tripId}`, "_blank", "noopener,noreferrer");
+    window.open(apiUrl(`/api/export/trips/${tripId}`), "_blank", "noopener,noreferrer");
   }
 
   return (

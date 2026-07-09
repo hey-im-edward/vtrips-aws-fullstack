@@ -5,3 +5,5 @@ dist/
 *.log
 backend/data/runtime-db.json
 docs/submission/screenshots/*.tmp.png
+infra/aws/.build/
+infra/aws/outputs.json

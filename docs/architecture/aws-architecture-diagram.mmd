@@ -1,30 +1,24 @@
 flowchart LR
   viewer[Viewer Browser]
-  cf[CloudFront HTTPS CDN]
-  s3[S3 Frontend and Media Bucket]
+  cf[CloudFront HTTPS CDN PriceClass_100]
+  s3[Private S3 Frontend Bucket]
   api[API Gateway HTTP API]
-  lambda[Lambda Backend Modules]
-  ddb[DynamoDB Tables]
-  cognito[Cognito User Pool]
-  cw[CloudWatch Logs and Metrics]
+  lambda[Lambda nodejs22.x API Handler]
+  ddb[DynamoDB PAY_PER_REQUEST Table]
+  cw[CloudWatch Logs]
   iam[IAM Least Privilege Roles]
 
   viewer -->|HTTPS| cf
   cf -->|Static React build| s3
-  cf -->|/api/* optional behavior| api
-  viewer -->|API calls in local/dev or direct prod| api
+  viewer -->|VITE_API_BASE_URL| api
   api --> lambda
   lambda --> ddb
-  lambda --> s3
-  viewer -.auth flow.-> cognito
-  cognito -.JWT.-> api
   lambda --> cw
-  api --> cw
   iam -.execution role.-> lambda
   iam -.OAC bucket access.-> cf
 
   subgraph Backend Modules
-    auth[Auth/User]
+    auth[Demo Auth/User]
     listing[Listing/Place]
     review[Review/Rating]
     trip[Trip Planner]
@@ -32,7 +26,7 @@ flowchart LR
     booking[Booking]
     dashboard[Business/Admin]
     export[Export PDF]
-    ai[AI Suggestion]
+    ai[AI Suggestion Fallback]
   end
 
   lambda --> auth

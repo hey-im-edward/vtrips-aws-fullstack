@@ -1,5 +1,125 @@
 # Log
 
+## 2026-07-09 - AWS-SAFE-0 Review Findings Fixed
+
+### Summary
+- Fixed the AWS-SAFE-0 review findings without deploying AWS app resources.
+- Hardened `infra/aws/deploy.ps1` so local build, local Lambda smoke test, and AWS Budget verification happen before CloudFormation.
+- Added failure handling that reports stack name, region, and cleanup command if a later approved deploy fails after resource creation may have started.
+- Added post-deploy API checks for `/api/health`, `/api/saved`, and `/api/bookings`.
+- Added CloudFront `PriceClass_100` to keep the demo cost posture explicit.
+- Kept Lambda runtime as `nodejs22.x`.
+
+### Files Changed
+- Updated `infra/aws/deploy.ps1`.
+- Updated `infra/aws/cloudformation.yml`.
+- Created `docs/deployment/aws-production-deploy.md`.
+- Updated deployment, architecture, submission, README, infra, and docs/ai materials.
+
+### Tests Run
+- `npm.cmd run build`; result: backend TypeScript build and frontend Vite production build passed.
+- `node infra/aws/test-lambda.mjs`; result: Lambda smoke test passed.
+- PowerShell parser syntax checks for `infra/aws/deploy.ps1` and `infra/aws/cleanup.ps1`; result: passed.
+- Secret scan for AWS access keys, session tokens, private keys, and common secret assignment patterns; result: no matches.
+- Email scan result: only demo email `traveler@vtrips.demo` found; no Budget subscriber email stored in repo.
+- `Test-Path infra/aws/outputs.json`; result: `False`.
+- Did not run `infra/aws/deploy.ps1` or `infra/aws/cleanup.ps1`.
+
+### Next Action
+- Run validation locally.
+- Do not run `infra/aws/deploy.ps1` until AWS-SAFE-1 is explicitly approved.
+
+## 2026-07-09 - Stage AWS-SAFE-0 Resume Completed
+
+### Summary
+- Resumed from the prior AWS session-expired blocker.
+- Verified AWS identity with the absolute AWS CLI v2 path.
+- Created and verified AWS Budget `VTrips-Demo-Budget` at 5 USD/month.
+- Ran read-only discovery for existing VTrips app resources.
+- Did not deploy app resources and did not run `infra/aws/deploy.ps1`.
+
+### AWS Verification
+- AWS CLI path: `C:\Program Files\Amazon\AWSCLIV2\aws.exe`.
+- AWS CLI version: `aws-cli/2.35.17`.
+- Configured region: `ap-southeast-1`.
+- STS account: `606163772198`.
+- STS ARN: `arn:aws:iam::606163772198:user/admin`.
+- ARN is not root.
+
+### Budget Status
+- Budget name: `VTrips-Demo-Budget`.
+- Budget limit: 5 USD/month.
+- Budget type: COST.
+- Health status: HEALTHY.
+- Notifications: ACTUAL and FORECASTED at 50%, 80%, and 100%.
+- AWS Budget notification email is configured in AWS account, not stored in repository.
+
+### Existing VTrips Resources Found
+- CloudFormation stack `vtrips-demo`: not found.
+- S3 buckets with vtrips/demo naming: none returned.
+- CloudFront distributions: none in account.
+- Lambda functions tagged/named VTrips/demo: none found.
+- API Gateway HTTP APIs with vtrips/demo naming: none returned.
+- DynamoDB tables with vtrips/demo naming: none returned.
+- Budget `VTrips-Demo-Budget`: found and healthy.
+
+### Tests Run
+- `npm.cmd run build`; result: backend TypeScript build and frontend Vite production build passed.
+- `node infra/aws/test-lambda.mjs`; result: Lambda smoke test passed.
+
+### Next Action
+- AWS-SAFE-0 is ready for review.
+- Proceed to AWS-SAFE-1 only after explicit approval to deploy app resources.
+
+## 2026-07-09 - Stage AWS-SAFE-0 Cost-Safe AWS Preparation
+
+### Summary
+- Prepared cost-safe AWS deployment artifacts without deploying app resources.
+- Found AWS CLI executable at `C:\Program Files\Amazon\AWSCLIV2\aws.exe`.
+- Confirmed configured region is `ap-southeast-1`.
+- Initial AWS STS identity check failed because the AWS session was expired; later resume completed identity and Budget verification.
+- Kept AWS Budget notification email out of repository files.
+
+### Files Changed
+- Added `infra/aws/cloudformation.yml`.
+- Added `infra/aws/lambda/index.mjs`.
+- Added `infra/aws/test-lambda.mjs`.
+- Added `infra/aws/deploy.ps1`.
+- Added `infra/aws/cleanup.ps1`.
+- Added `docs/deployment/aws-production-outputs.md`.
+- Updated frontend API base handling for `VITE_API_BASE_URL`.
+- Updated README, architecture, deployment, cleanup, submission, and docs/ai files.
+
+### Tests Run
+- `Get-Command aws -ErrorAction SilentlyContinue`; result: no PATH command.
+- `where.exe aws`; result: not found.
+- `Test-Path "C:\Program Files\Amazon\AWSCLIV2\aws.exe"`; result: `True`.
+- `Test-Path "$env:LOCALAPPDATA\Programs\Amazon\AWSCLIV2\aws.exe"`; result: `False`.
+- `& "C:\Program Files\Amazon\AWSCLIV2\aws.exe" --version`; result: AWS CLI v2 found.
+- `& "C:\Program Files\Amazon\AWSCLIV2\aws.exe" configure get region`; result: `ap-southeast-1`.
+- `& "C:\Program Files\Amazon\AWSCLIV2\aws.exe" sts get-caller-identity`; result: failed with expired session, so AWS identity/resource/Budget checks could not complete.
+- `npm.cmd install`; result: up to date, 0 vulnerabilities.
+- First `npm.cmd run build`; result: failed because frontend was missing Vite `import.meta.env` types.
+- Added `frontend/src/vite-env.d.ts`.
+- Second `npm.cmd run build`; result: backend TypeScript build and frontend Vite production build passed.
+- `node infra/aws/test-lambda.mjs`; result: Lambda smoke test passed.
+- PowerShell parser syntax checks for `infra/aws/deploy.ps1` and `infra/aws/cleanup.ps1`; result: passed.
+- Secret/email scan for AWS key patterns and the Budget notification email; result: no matches in repo files.
+
+### Next Action
+- Reauthenticate AWS CLI session with AWS-supported login flow, then rerun identity/resource/Budget checks before any app deployment.
+
+### Continuation Check
+- Retried `& "C:\Program Files\Amazon\AWSCLIV2\aws.exe" sts get-caller-identity --region ap-southeast-1`.
+- Result is still blocked by expired AWS session: `Your session has expired. Please reauthenticate using 'aws login'.`
+- No AWS Budget, CloudFormation, S3, CloudFront, Lambda, API Gateway, DynamoDB, IAM, or CloudWatch app resource mutation was run.
+
+### Blocked Audit Check
+- Retried the same STS identity gate again with the absolute AWS CLI path.
+- Result remains: `Your session has expired. Please reauthenticate using 'aws login'.`
+- This is the third consecutive goal turn with the same external AWS session blocker.
+- Stage AWS-SAFE-0 cannot be completed until AWS CLI reauthentication succeeds, because Budget/resource checks require verified identity.
+
 ## 2026-07-08 - Stage G0 GitHub Publish Preparation
 
 ### Summary
