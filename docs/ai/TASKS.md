@@ -3,17 +3,23 @@
 Do not put old completed history here; detailed history belongs in `LOG.md` or git history.
 
 ## Now
-- Keep app AWS deployment as a future, separately approved step.
+- Review AWS-SAFE-1 deployed production evidence.
+- Decide when to run AWS cleanup after demo/screenshot needs are done.
 
 ## Next
-- If AWS-SAFE-1 is explicitly approved, run `infra/aws/deploy.ps1` to deploy stack `vtrips-demo`.
-- After any demo deploy, run `infra/aws/cleanup.ps1 -ConfirmCleanup`.
+- If cleanup is explicitly approved, run `infra/aws/cleanup.ps1 -Region ap-southeast-1 -StackName vtrips-demo -ConfirmCleanup`.
 
 ## Later
 - Ask user before any AWS deploy or cost-impacting resource creation.
 - Consider GitNexus indexing only for the current project repo if code understanding/refactor impact is needed.
 
 ## Done
+- Stage AWS-SAFE-1 deployed stack `vtrips-demo` in `ap-southeast-1`.
+- Stage AWS-SAFE-1 produced App URL `https://d3jokdtkqozo6v.cloudfront.net`.
+- Stage AWS-SAFE-1 produced API URL `https://i00w4birlk.execute-api.ap-southeast-1.amazonaws.com`.
+- Stage AWS-SAFE-1 verified CloudFormation `CREATE_COMPLETE` and CloudFront `Deployed`.
+- Stage AWS-SAFE-1 verified production `/api/health`, `/api/saved`, `/api/bookings`, and frontend HTTP 200.
+- Stage AWS-SAFE-1 captured `docs/submission/screenshots/vtrips-production-cloudfront.png`.
 - Stage AWS-SAFE-0 prepared `infra/aws/cloudformation.yml`.
 - Stage AWS-SAFE-0 prepared Lambda handler and local Lambda smoke test.
 - Stage AWS-SAFE-0 prepared guarded `deploy.ps1` and `cleanup.ps1`.

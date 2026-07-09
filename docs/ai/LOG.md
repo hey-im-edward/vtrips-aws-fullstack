@@ -1,5 +1,60 @@
 # Log
 
+## 2026-07-09 - AWS-SAFE-1 Production Demo Deployed
+
+### Summary
+- Deployed the approved cost-safe AWS production demo stack `vtrips-demo`.
+- Used account `606163772198`, non-root IAM user `arn:aws:iam::606163772198:user/admin`, and region `ap-southeast-1`.
+- Kept the stack limited to S3, CloudFront, API Gateway HTTP API, Lambda, DynamoDB, IAM, and CloudWatch Logs.
+- Did not deploy Cognito, Bedrock, RDS, OpenSearch, WAF, NAT Gateway, EC2, Elastic Beanstalk, or custom KMS keys.
+- Did not run cleanup.
+
+### Outputs
+- App production HTTPS URL: `https://d3jokdtkqozo6v.cloudfront.net`.
+- API production HTTPS URL: `https://i00w4birlk.execute-api.ap-southeast-1.amazonaws.com`.
+- Stack name: `vtrips-demo`.
+- Region: `ap-southeast-1`.
+- CloudFront distribution: `E1OJWPSPR0QY0E`.
+- DynamoDB table: `vtrips-demo-data`.
+- Lambda function: `vtrips-demo-api`.
+- API Gateway API ID: `i00w4birlk`.
+
+### Preflight
+- `git status --short`; result: clean before deploy.
+- `aws sts get-caller-identity --region ap-southeast-1`; result: account `606163772198`, ARN `arn:aws:iam::606163772198:user/admin`, not root.
+- `aws configure get region`; result: `ap-southeast-1`.
+- `aws budgets describe-budget`; result: `VTrips-Demo-Budget`, 5 USD/month, `COST`, `MONTHLY`, `HEALTHY`.
+- `aws cloudformation describe-stacks --stack-name vtrips-demo`; result before deploy: stack did not exist.
+
+### Deploy
+- Direct `.\infra\aws\deploy.ps1 -Region ap-southeast-1 -StackName vtrips-demo` was blocked by Windows ExecutionPolicy before running script logic.
+- Ran the same script with `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\infra\aws\deploy.ps1 -Region ap-southeast-1 -StackName vtrips-demo`.
+- Fixed script AWS CLI resolution so it can use `C:\Program Files\Amazon\AWSCLIV2\aws.exe` when `aws` is not on PATH.
+- Deploy script completed successfully.
+
+### Verification
+- `npm.cmd install`; result: up to date, 0 vulnerabilities.
+- `npm.cmd run build`; result: backend TypeScript build and frontend Vite production build passed.
+- `node infra/aws/test-lambda.mjs`; result: Lambda smoke test passed.
+- `infra/aws/outputs.json`; result: created with AppUrl, ApiUrl, CloudFrontDistributionId, DynamoTableName, LambdaFunctionName, and ApiId.
+- `aws cloudformation describe-stacks`; result: `CREATE_COMPLETE`.
+- `aws cloudfront get-distribution`; result: `Deployed`, `PriceClass_100`.
+- `Invoke-RestMethod <ApiUrl>/api/health`; result: `status=ok`.
+- `Invoke-RestMethod <ApiUrl>/api/saved`; result: returned 2 saved places.
+- `Invoke-RestMethod <ApiUrl>/api/bookings`; result: returned 1 booking.
+- `Invoke-WebRequest <AppUrl>`; result: HTTP 200.
+- Captured production screenshot at `docs/submission/screenshots/vtrips-production-cloudfront.png`.
+- Microsoft Edge logged Chromium task manager warnings while capturing screenshot, but the screenshot command exited 0 on retry and the image was inspected successfully.
+
+### Cleanup
+- Cleanup was not run.
+- Cleanup command when approved: `.\infra\aws\cleanup.ps1 -Region ap-southeast-1 -StackName vtrips-demo -ConfirmCleanup`.
+- AWS Budget is a cost alert, not an automatic spending brake.
+
+### Next Action
+- Commit and push AWS-SAFE-1 docs/output/screenshot updates.
+- Optionally update `../vtrips-workshop` with the production App URL.
+
 ## 2026-07-09 - AWS-SAFE-0 Review Findings Fixed
 
 ### Summary

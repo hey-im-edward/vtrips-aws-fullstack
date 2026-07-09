@@ -1,6 +1,6 @@
 # AWS Production Deploy Guide
 
-Stage AWS-SAFE-0 prepares deployment artifacts only. Do not deploy app resources until the user explicitly approves a later deploy stage.
+Stage AWS-SAFE-1 deployed the approved cost-safe production demo stack. Use this guide for redeploy/update and cleanup reference.
 
 ## AWS-SAFE-0 Guardrails
 
@@ -12,7 +12,9 @@ Stage AWS-SAFE-0 prepares deployment artifacts only. Do not deploy app resources
 - AWS Budget required limit: 5 USD/month, `COST`, `MONTHLY`.
 - AWS Budget notification email is configured in AWS account, not stored in repository.
 - CloudFront uses `PriceClass_100` for the cost-safe demo. `PriceClass_200` can be considered later if APAC latency matters more than cost.
-- App resources are not deployed in AWS-SAFE-0.
+- App production HTTPS URL: `https://d3jokdtkqozo6v.cloudfront.net`.
+- API production HTTPS URL: `https://i00w4birlk.execute-api.ap-southeast-1.amazonaws.com`.
+- Budget is a cost alert, not an automatic spending brake.
 
 ## Allowed Demo Services
 
@@ -26,13 +28,13 @@ Stage AWS-SAFE-0 prepares deployment artifacts only. Do not deploy app resources
 
 Excluded unless explicitly approved later: Bedrock, OpenSearch, RDS, WAF, NAT Gateway, EC2, Elastic Beanstalk, Cognito, and custom KMS keys.
 
-## Prepared Deploy Command
+## Redeploy/Update Command
 
-Do not run this command in AWS-SAFE-0. It is prepared for a later approved stage:
+Use this command only when an approved update is needed:
 
 ```powershell
 cd D:\elros\Documents\AI-LifeOS\repos\vtrips-aws-fullstack
-.\infra\aws\deploy.ps1
+.\infra\aws\deploy.ps1 -Region ap-southeast-1 -StackName vtrips-demo
 ```
 
 The script will:
@@ -59,7 +61,7 @@ If a failure happens after CloudFormation resource creation may have started, th
 Cleanup is mandatory after any approved demo deployment:
 
 ```powershell
-.\infra\aws\cleanup.ps1 -ConfirmCleanup
+.\infra\aws\cleanup.ps1 -Region ap-southeast-1 -StackName vtrips-demo -ConfirmCleanup
 ```
 
 See `docs/deployment/cleanup-guide.md`.

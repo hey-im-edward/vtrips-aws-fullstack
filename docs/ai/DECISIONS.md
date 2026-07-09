@@ -1,5 +1,26 @@
 # Decisions
 
+## 2026-07-09 - AWS-SAFE-1 Production Demo Deployment
+
+### Decision
+- Deploy the approved cost-safe stack `vtrips-demo` in `ap-southeast-1`.
+- Keep the demo stack limited to S3, CloudFront, API Gateway HTTP API, Lambda, DynamoDB, IAM, and CloudWatch Logs.
+- Do not run cleanup automatically after deploy; cleanup requires explicit user approval.
+
+### Reason
+- The user explicitly approved AWS-SAFE-1 to create small cost-bearing demo resources.
+- The deployed stack provides real CloudFront and API Gateway HTTPS URLs for demo and screenshot evidence.
+- Manual cleanup prevents accidental deletion before submission evidence is captured.
+
+### Alternatives Rejected
+- Adding Cognito, Bedrock, RDS, OpenSearch, WAF, NAT Gateway, EC2, Elastic Beanstalk, or custom KMS keys to this demo stage.
+- Treating AWS Budget as an automatic cost stop.
+
+### Impact
+- Production App URL is `https://d3jokdtkqozo6v.cloudfront.net`.
+- Production API URL is `https://i00w4birlk.execute-api.ap-southeast-1.amazonaws.com`.
+- Cleanup command is `.\infra\aws\cleanup.ps1 -Region ap-southeast-1 -StackName vtrips-demo -ConfirmCleanup`.
+
 ## 2026-07-08 - Separate Workshop Website Repository
 
 ### Decision

@@ -2,7 +2,7 @@
 
 ## Summary
 
-V-Trips is implemented locally as a modular monolith/serverless-style demo and prepared for a cost-safe AWS stack. Stage AWS-SAFE-0 prepares infrastructure artifacts but does not deploy app resources.
+V-Trips is implemented locally as a modular monolith/serverless-style demo and deployed as a cost-safe AWS-SAFE-1 production demo stack.
 
 ## Cost-Safe Target Services
 
@@ -58,8 +58,11 @@ All app resources that support tags must use:
 ## Honest Status
 
 - Working locally: frontend, backend, local persistence, core demo workflows.
-- Prepared in AWS-SAFE-0: CloudFormation template, Lambda handler, guarded deploy script, guarded cleanup script, and production outputs placeholder.
-- Future deploy guardrails: local build, local Lambda smoke test, AWS Budget verification, CloudFront `PriceClass_100`, and post-deploy API checks.
-- Not deployed yet: S3, CloudFront, API Gateway, Lambda, DynamoDB, IAM role, and CloudWatch Logs app resources.
+- Deployed in AWS-SAFE-1: S3, CloudFront, API Gateway HTTP API, Lambda, DynamoDB, IAM role, and CloudWatch Logs app resources.
+- Production App URL: `https://d3jokdtkqozo6v.cloudfront.net`.
+- Production API URL: `https://i00w4birlk.execute-api.ap-southeast-1.amazonaws.com`.
+- Deploy guardrails: local build, local Lambda smoke test, AWS Budget verification, CloudFront `PriceClass_100`, and post-deploy API checks.
+- Budget is a cost alert, not an automatic spending brake.
+- Cleanup should run after demo if ongoing costs should stop.
 
 For the service split path, see `docs/architecture/microservices-ready-architecture.md`.

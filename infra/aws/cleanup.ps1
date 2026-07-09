@@ -12,11 +12,6 @@ function Resolve-AwsCli {
     return $command.Source
   }
 
-  $where = where.exe aws 2>$null
-  if ($LASTEXITCODE -eq 0 -and $where) {
-    return ($where | Select-Object -First 1)
-  }
-
   $candidates = @(
     "C:\Program Files\Amazon\AWSCLIV2\aws.exe",
     "$env:LOCALAPPDATA\Programs\Amazon\AWSCLIV2\aws.exe"

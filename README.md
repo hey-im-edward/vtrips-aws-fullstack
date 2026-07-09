@@ -8,7 +8,8 @@ The FCJ-style Workshop Link website is intentionally split into `../vtrips-works
 - App GitHub repo: `https://github.com/hey-im-edward/vtrips-aws-fullstack`
 - Workshop repo: `https://github.com/hey-im-edward/aws-fcj-workshop`
 - Workshop URL: `https://hey-im-edward.github.io/aws-fcj-workshop/`
-- App production HTTPS URL: `TODO CloudFront URL`
+- App production HTTPS URL: `https://d3jokdtkqozo6v.cloudfront.net`
+- API production HTTPS URL: `https://i00w4birlk.execute-api.ap-southeast-1.amazonaws.com`
 
 ## Implemented
 - Local React + Vite + TypeScript frontend in `frontend/`.
@@ -21,8 +22,8 @@ The FCJ-style Workshop Link website is intentionally split into `../vtrips-works
 - Auth is demo auth with a Cognito-ready contract, not a real Cognito user pool.
 - AI suggestion is deterministic rule-based fallback, not Bedrock.
 - Export PDF uses a print-ready HTML page and browser Print -> Save as PDF.
-- AWS deploy is documented but not executed from this repo run.
-- Stage AWS-SAFE-0 prepares deploy artifacts only; app resources are not deployed yet.
+- AWS-SAFE-1 deployed the cost-safe production demo stack.
+- Budget is a cost alert, not an automatic spending brake.
 
 ## Future Work
 - Real Cognito hosted UI and social login.
@@ -67,25 +68,32 @@ node scripts/smoke-api.mjs
 
 Excluded from the cost-safe demo stack unless explicitly approved later: Bedrock, OpenSearch, RDS, WAF, NAT Gateway, EC2, Elastic Beanstalk, Cognito, and custom KMS keys.
 
-See [AWS architecture](docs/architecture/aws-architecture.md), [production deploy guide](docs/deployment/aws-production-deploy.md), [production outputs placeholder](docs/deployment/aws-production-outputs.md), and [cleanup guide](docs/deployment/cleanup-guide.md).
+See [AWS architecture](docs/architecture/aws-architecture.md), [production deploy guide](docs/deployment/aws-production-deploy.md), [production outputs](docs/deployment/aws-production-outputs.md), and [cleanup guide](docs/deployment/cleanup-guide.md).
 For the future split path, see [microservices-ready architecture](docs/architecture/microservices-ready-architecture.md).
 
-## AWS-SAFE-0 Prepared Commands
+## AWS-SAFE-1 Production Demo
 
-AWS-SAFE-0 does not deploy app resources. The deploy command is prepared for a later approved stage:
+The cost-safe production demo stack is deployed in AWS:
+
+- Stack: `vtrips-demo`
+- Region: `ap-southeast-1`
+- Services: S3, CloudFront, API Gateway HTTP API, Lambda, DynamoDB, IAM, and CloudWatch Logs.
+- Not deployed: Cognito, Bedrock, RDS, OpenSearch, WAF, NAT Gateway, EC2, Elastic Beanstalk, or custom KMS keys.
+
+Redeploy/update command:
 
 ```powershell
-.\infra\aws\deploy.ps1
+.\infra\aws\deploy.ps1 -Region ap-southeast-1 -StackName vtrips-demo
 ```
 
-Mandatory cleanup command after any approved demo deploy:
+Cleanup command after the demo:
 
 ```powershell
-.\infra\aws\cleanup.ps1 -ConfirmCleanup
+.\infra\aws\cleanup.ps1 -Region ap-southeast-1 -StackName vtrips-demo -ConfirmCleanup
 ```
 
 AWS Budget notification email is configured in AWS account, not stored in repository.
-The future deploy script verifies the 5 USD/month Budget guardrail, runs local build and Lambda smoke validation before CloudFormation, and runs post-deploy API checks before publishing the frontend.
+Cleanup should be run after the demo if you want to stop ongoing costs.
 
 ## Documentation Map
 - API: `docs/api/endpoints.md`

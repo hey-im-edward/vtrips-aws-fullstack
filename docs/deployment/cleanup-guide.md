@@ -6,11 +6,17 @@ Cleanup is mandatory after any approved V-Trips AWS demo deployment. Do not run 
 
 ```powershell
 cd D:\elros\Documents\AI-LifeOS\repos\vtrips-aws-fullstack
-.\infra\aws\cleanup.ps1 -ConfirmCleanup
+.\infra\aws\cleanup.ps1 -Region ap-southeast-1 -StackName vtrips-demo -ConfirmCleanup
 ```
 
 The script refuses to run without `-ConfirmCleanup`, wrong account, root identity, or wrong region.
 If `deploy.ps1` fails after CloudFormation resource creation may have started, it prints this cleanup command with stack name and region. Cleanup is still manual and must not run automatically.
+
+Equivalent command without the `cd` line:
+
+```powershell
+.\infra\aws\cleanup.ps1 -Region ap-southeast-1 -StackName vtrips-demo -ConfirmCleanup
+```
 
 ## Cleanup Order
 
@@ -27,4 +33,5 @@ If `deploy.ps1` fails after CloudFormation resource creation may have started, i
 - Do not delete shared IAM roles, shared buckets, shared log groups, or resources outside stack `vtrips-demo`.
 - Capture screenshots/evidence before cleanup if needed for submission.
 - AWS Budget notification email is configured in AWS account, not stored in repository.
+- AWS Budget is a cost alert, not an automatic spending brake.
 - Keep cleanup scoped to stack `vtrips-demo`; do not delete unrelated AWS resources.

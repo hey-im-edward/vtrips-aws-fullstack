@@ -11,11 +11,6 @@ function Resolve-AwsCli {
     return $command.Source
   }
 
-  $where = where.exe aws 2>$null
-  if ($LASTEXITCODE -eq 0 -and $where) {
-    return ($where | Select-Object -First 1)
-  }
-
   $candidates = @(
     "C:\Program Files\Amazon\AWSCLIV2\aws.exe",
     "$env:LOCALAPPDATA\Programs\Amazon\AWSCLIV2\aws.exe"
@@ -214,7 +209,7 @@ function Write-CleanupHint {
   Write-Warning $Reason
   Write-Warning "Stack name: $StackName"
   Write-Warning "Region: $Region"
-  Write-Warning "Cleanup command: .\infra\aws\cleanup.ps1 -ConfirmCleanup"
+  Write-Warning "Cleanup command: .\infra\aws\cleanup.ps1 -Region $Region -StackName $StackName -ConfirmCleanup"
   Write-Warning "Cleanup was not run automatically."
 }
 
@@ -326,12 +321,12 @@ Generated: $generatedAt
 
 Cleanup command:
 
-````powershell
-.\infra\aws\cleanup.ps1 -ConfirmCleanup
-````
+~~~powershell
+.\infra\aws\cleanup.ps1 -Region $Region -StackName $StackName -ConfirmCleanup
+~~~
 "@ | Set-Content -LiteralPath $outputsMarkdown -Encoding UTF8
 
 Write-Host "Deploy complete."
 Write-Host "AppUrl: $($outputs.AppUrl)"
 Write-Host "ApiUrl: $($outputs.ApiUrl)"
-Write-Host "Cleanup command: .\infra\aws\cleanup.ps1 -ConfirmCleanup"
+Write-Host "Cleanup command: .\infra\aws\cleanup.ps1 -Region $Region -StackName $StackName -ConfirmCleanup"

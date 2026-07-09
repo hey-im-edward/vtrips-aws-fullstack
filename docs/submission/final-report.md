@@ -1,13 +1,14 @@
 # V-Trips Final Report
 
 ## Summary
-V-Trips is a local fullstack travel product demo with a React/Vite frontend, Node.js/TypeScript backend, local JSON persistence, and AWS-ready architecture documentation. Stage AWS-SAFE-0 prepares cost-safe AWS deploy artifacts but does not deploy app resources.
+V-Trips is a fullstack travel product demo with a React/Vite frontend, Node.js/TypeScript backend, local JSON persistence, and a deployed cost-safe AWS-SAFE-1 production demo stack.
 
 ## Public links
 - App GitHub repo: `https://github.com/hey-im-edward/vtrips-aws-fullstack`
 - Workshop repo: `https://github.com/hey-im-edward/aws-fcj-workshop`
 - Workshop URL: `https://hey-im-edward.github.io/aws-fcj-workshop/`
-- App production HTTPS URL: `TODO CloudFront URL`
+- App production HTTPS URL: `https://d3jokdtkqozo6v.cloudfront.net`
+- API production HTTPS URL: `https://i00w4birlk.execute-api.ap-southeast-1.amazonaws.com`
 
 ## What was built
 - Frontend app shell with Explore, Trips, Saved, Business, and Admin tabs.
@@ -40,19 +41,19 @@ Open `http://127.0.0.1:5173`. Backend health runs at `http://127.0.0.1:8787/api/
 - IAM least privilege.
 - Microservices-ready service boundaries and future split path in `docs/architecture/microservices-ready-architecture.md`.
 
-## How to deploy AWS
-Follow `docs/deployment/aws-production-deploy.md`. Do not run `infra/aws/deploy.ps1` until a later approved deployment stage. No V-Trips app resources were created in AWS-SAFE-0.
+## AWS production demo
+Follow `docs/deployment/aws-production-deploy.md` for deploy/update details. AWS-SAFE-1 deployed stack `vtrips-demo` in `ap-southeast-1`.
 
-Prepared deploy command:
+Redeploy/update command:
 
 ```powershell
-.\infra\aws\deploy.ps1
+.\infra\aws\deploy.ps1 -Region ap-southeast-1 -StackName vtrips-demo
 ```
 
-Mandatory cleanup command after any approved demo deploy:
+Cleanup command after the demo:
 
 ```powershell
-.\infra\aws\cleanup.ps1 -ConfirmCleanup
+.\infra\aws\cleanup.ps1 -Region ap-southeast-1 -StackName vtrips-demo -ConfirmCleanup
 ```
 
 ## What is working
@@ -60,15 +61,14 @@ Mandatory cleanup command after any approved demo deploy:
 - Local API routes and JSON persistence.
 - Core UI screens and workflows listed in `GOAL.md`.
 - App-local technical and submission docs.
-- Cost-safe AWS artifacts under `infra/aws/`.
-- Future deploy guardrails: pre-CloudFormation build/test, AWS Budget verification, CloudFront `PriceClass_100`, and post-deploy API checks.
+- Cost-safe AWS stack deployed with S3, CloudFront, API Gateway HTTP API, Lambda, DynamoDB, IAM, and CloudWatch Logs.
+- Deploy guardrails: pre-CloudFormation build/test, AWS Budget verification, CloudFront `PriceClass_100`, and post-deploy API checks.
 
 ## What is prototype/fallback
 - Demo auth instead of Cognito.
 - Rule-based AI instead of Bedrock.
 - Browser print HTML instead of native PDF generation.
-- Local JSON persistence instead of DynamoDB.
-- AWS production deployment is prepared but not executed.
+- Cognito, Bedrock, RDS, OpenSearch, WAF, NAT Gateway, EC2, Elastic Beanstalk, and custom KMS keys are not part of the demo stack.
 
 ## Files changed
 - App code in `frontend/` and `backend/`.
@@ -97,17 +97,20 @@ Mandatory cleanup command after any approved demo deploy:
 - Playwright MCP was unavailable because Chrome was missing; Edge headless was used as browser screenshot fallback.
 - Secret pattern scan found no matches for the scanned patterns.
 - Lambda handler local in-memory smoke test is part of AWS-SAFE-0 validation.
+- AWS-SAFE-1 production verification passed for `/api/health`, `/api/saved`, `/api/bookings`, CloudFront HTTP 200, and production screenshot `docs/submission/screenshots/vtrips-production-cloudfront.png`.
 
 ## Risks
 - Official FCAJ/HUTECH rules were not fully verifiable from public links in the source report.
 - Remote Unsplash images require network access for best visual demo.
-- Real AWS deploy, Cognito, Bedrock, and production DynamoDB design remain future implementation.
+- Cognito, Bedrock, RDS/OpenSearch/WAF, and production-grade auth/search remain future implementation.
 - Current architecture is microservices-ready modular monolith, not real production microservices.
-- Cleanup is mandatory after any approved demo deployment.
+- AWS Budget is a cost alert, not an automatic spending brake.
+- Cleanup is mandatory after the demo if ongoing AWS costs should stop.
 
 ## What user must do before submission
 - Run the local demo and capture final screenshots.
-- Decide whether to approve AWS-SAFE-1 deployment for the cost-safe demo stack.
+- Use the production CloudFront URL for demo/submission evidence.
+- Run cleanup after demo if the AWS production URL is no longer needed.
 - Keep the final Workshop Link website in `../vtrips-workshop`.
 
 ## AWS-SAFE-0 Update
@@ -117,10 +120,20 @@ Mandatory cleanup command after any approved demo deploy:
 - AWS Budget `VTrips-Demo-Budget` exists at 5 USD/month with ACTUAL and FORECASTED notifications at 50%, 80%, and 100%.
 - Read-only discovery found no existing VTrips app resources.
 - AWS Budget notification email is configured in AWS account, not stored in repository.
-- App resources were not deployed.
+- At AWS-SAFE-0 time, app resources were not deployed.
 - Prepared target stack name: `vtrips-demo`.
 - Prepared target services: S3, CloudFront `PriceClass_100`, API Gateway HTTP API, Lambda `nodejs22.x`, DynamoDB on-demand, IAM, and CloudWatch Logs.
 - Prepared deploy script now validates local build, local Lambda smoke test, and AWS Budget before CloudFormation, then checks `/api/health`, `/api/saved`, and `/api/bookings` after deployment.
+
+## AWS-SAFE-1 Deployment Update
+- Stack `vtrips-demo` deployed in `ap-southeast-1`.
+- CloudFormation status: `CREATE_COMPLETE`.
+- CloudFront distribution `E1OJWPSPR0QY0E` status: `Deployed`.
+- App production HTTPS URL: `https://d3jokdtkqozo6v.cloudfront.net`.
+- API production HTTPS URL: `https://i00w4birlk.execute-api.ap-southeast-1.amazonaws.com`.
+- Verified production API endpoints: `/api/health`, `/api/saved`, `/api/bookings`.
+- Captured production screenshot: `docs/submission/screenshots/vtrips-production-cloudfront.png`.
+- Cleanup command: `.\infra\aws\cleanup.ps1 -Region ap-southeast-1 -StackName vtrips-demo -ConfirmCleanup`.
 
 ## Post-Implementation Audit Update
 - README local run was verified with `npm.cmd install` and `npm.cmd run dev`.

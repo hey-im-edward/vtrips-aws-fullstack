@@ -42,17 +42,22 @@
 - [x] Verify AWS identity before Budget/resource checks.
 - [x] Create/check AWS Budget `VTrips-Demo-Budget` after AWS identity is verified.
 - [x] Run read-only discovery for existing VTrips app resources.
-- [ ] Ask user before any app AWS deploy.
+- [x] Ask user before any app AWS deploy.
 - [ ] Run cleanup after any approved demo deploy.
+- [x] Deploy AWS-SAFE-1 cost-safe production stack after explicit approval.
+- [x] Verify production API `/api/health`, `/api/saved`, and `/api/bookings`.
+- [x] Verify CloudFront frontend returns HTTP 200.
+- [x] Capture production CloudFront screenshot.
 
 ## Public Links
 - App GitHub repo: `https://github.com/hey-im-edward/vtrips-aws-fullstack`
 - Workshop repo: `https://github.com/hey-im-edward/aws-fcj-workshop`
 - Workshop URL: `https://hey-im-edward.github.io/aws-fcj-workshop/`
-- App production HTTPS URL: `TODO CloudFront URL`
+- App production HTTPS URL: `https://d3jokdtkqozo6v.cloudfront.net`
+- API production HTTPS URL: `https://i00w4birlk.execute-api.ap-southeast-1.amazonaws.com`
 
 ## AWS-SAFE-0 Status
-- Production AWS deployment is prepared but not yet deployed.
+- Production AWS deployment is live in stack `vtrips-demo`, region `ap-southeast-1`.
 - AWS identity verified for account `606163772198` with non-root ARN.
 - AWS Budget `VTrips-Demo-Budget` is configured at 5 USD/month.
 - Read-only discovery found no existing VTrips app stack/resources.
@@ -61,3 +66,5 @@
 - Future deploy script checks `/api/health`, `/api/saved`, and `/api/bookings` after deployment.
 - Bedrock, OpenSearch, RDS, WAF, NAT Gateway, EC2, Elastic Beanstalk, Cognito, and custom KMS keys are future extensions only.
 - AWS Budget notification email is configured in AWS account, not stored in repository.
+- Budget is a cost alert, not an automatic spending brake.
+- Cleanup command: `.\infra\aws\cleanup.ps1 -Region ap-southeast-1 -StackName vtrips-demo -ConfirmCleanup`.

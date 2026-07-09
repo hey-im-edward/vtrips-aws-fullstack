@@ -5,8 +5,8 @@
 - The demo should prioritize a working local product, polished travel UI, clear backend/API boundaries, AWS architecture documentation, workshop materials, blog drafts, deployment guide, and cleanup guide.
 
 ## Current Focus
-- Stage AWS-SAFE-0: prepare cost-safe AWS deployment artifacts without deploying app resources.
-- The only AWS mutation allowed in AWS-SAFE-0 is AWS Budget create/check after identity preflight passes.
+- Stage AWS-SAFE-1: cost-safe AWS production demo is deployed.
+- Next operational focus is evidence review and cleanup timing.
 - The FCJ-style Workshop Link website remains split into `../vtrips-workshop`; this repo only keeps app-local workshop reference docs.
 
 ## Current Status
@@ -24,30 +24,34 @@
 - Target workshop repo: `https://github.com/hey-im-edward/aws-fcj-workshop`.
 - Target workshop URL: `https://hey-im-edward.github.io/aws-fcj-workshop/`.
 - Public app GitHub repo is created and branch `main` is pushed.
-- App production HTTPS URL remains `TODO CloudFront URL` until a real AWS deploy is approved and completed.
+- App production HTTPS URL: `https://d3jokdtkqozo6v.cloudfront.net`.
+- API production HTTPS URL: `https://i00w4birlk.execute-api.ap-southeast-1.amazonaws.com`.
 - AWS CLI binary found at `C:\Program Files\Amazon\AWSCLIV2\aws.exe`.
 - AWS region config is `ap-southeast-1`.
 - AWS identity verified for account `606163772198` with non-root ARN `arn:aws:iam::606163772198:user/admin`.
 - AWS Budget `VTrips-Demo-Budget` exists at 5 USD/month with notifications configured in AWS account.
-- Read-only discovery found no existing VTrips app stack/resources.
-- No app resources have been deployed in AWS-SAFE-0.
+- AWS-SAFE-1 deployed stack `vtrips-demo` in `ap-southeast-1`.
+- CloudFormation status is `CREATE_COMPLETE`.
+- CloudFront distribution `E1OJWPSPR0QY0E` is `Deployed`.
 - AWS-SAFE-0 infra artifacts are under `infra/aws/`.
-- Prepared future stack name: `vtrips-demo`.
+- Deployed stack name: `vtrips-demo`.
 - CloudFront target uses `PriceClass_100` for the cost-safe demo.
-- Future `infra/aws/deploy.ps1` validates local build, local Lambda smoke test, and AWS Budget before CloudFormation.
-- Future `infra/aws/deploy.ps1` checks `/api/health`, `/api/saved`, and `/api/bookings` after deploy before uploading frontend assets.
+- `infra/aws/deploy.ps1` validates local build, local Lambda smoke test, and AWS Budget before CloudFormation.
+- `infra/aws/deploy.ps1` checks `/api/health`, `/api/saved`, and `/api/bookings` after deploy before uploading frontend assets.
+- Production verification passed for `/api/health`, `/api/saved`, `/api/bookings`, CloudFront HTTP 200, and screenshot `docs/submission/screenshots/vtrips-production-cloudfront.png`.
+- Budget is a cost alert, not an automatic spending brake.
+- Cleanup command after demo: `.\infra\aws\cleanup.ps1 -Region ap-southeast-1 -StackName vtrips-demo -ConfirmCleanup`.
 
 ## Constraints
 - GitHub repo creation/push is explicitly approved for Stage G0 only.
-- Do not deploy AWS resources unless explicitly approved.
+- Do not deploy additional AWS resources unless explicitly approved.
 - Do not run GitNexus analyze/index from AI-LifeOS root.
 - Do not modify AI-LifeOS root `.git`.
 - Do not touch vault content outside the project memory created by `init-agent-project.ps1`.
 - Do not ask for AWS password.
 - Do not hard-code secrets.
 - Do not store AWS Budget notification email in repo/docs.
-- Do not deploy app resources in AWS-SAFE-0.
-- Do not run `infra/aws/deploy.ps1` or `infra/aws/cleanup.ps1` in AWS-SAFE-0.
+- Do not run `infra/aws/cleanup.ps1` unless the user explicitly requests cleanup.
 - Do not create Bedrock, OpenSearch, RDS, WAF, NAT Gateway, EC2, Elastic Beanstalk, Cognito, or custom KMS keys unless explicitly approved later.
 
 ## Do Not Change
@@ -56,4 +60,4 @@
 - Do not install dependencies until the implementation stage explicitly needs them.
 
 ## Open Questions
-- Whether the user wants a real AWS deploy after AWS-SAFE-0 guardrails are verified.
+- When to run cleanup after demo evidence is captured.
